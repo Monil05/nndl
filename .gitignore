@@ -1,0 +1,9 @@
+# Dataset
+dataset/*.zip
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
