@@ -1,0 +1,20 @@
+{
+  "split_counts": {
+    "train": {
+      "fake": 4000,
+      "real": 4000
+    },
+    "valid": {
+      "fake": 500,
+      "real": 500
+    },
+    "test": {
+      "fake": 500,
+      "real": 500
+    }
+  },
+  "corrupt": [],
+  "same_split_duplicate_groups": [],
+  "same_split_cross_class_duplicate_groups": [],
+  "cross_split_duplicate_groups": []
+}

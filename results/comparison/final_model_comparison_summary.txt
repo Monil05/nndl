@@ -1,0 +1,17 @@
+FINAL EXPERIMENT SUMMARY
+======================================================================
+   Metric  Custom CNN  EfficientNet-B0  EfficientNet improvement
+ Accuracy    0.723000         0.969000                  0.246000
+Precision    0.698752         0.966203                  0.267451
+   Recall    0.784000         0.972000                  0.188000
+ F1-score    0.738926         0.969093                  0.230167
+  ROC-AUC    0.801834         0.996264                  0.194430
+
+Better model by metric:
+Accuracy: EfficientNet-B0
+Precision: EfficientNet-B0
+Recall: EfficientNet-B0
+F1-score: EfficientNet-B0
+ROC-AUC: EfficientNet-B0
+
+EfficientNet-B0 is better than the custom CNN on both test accuracy and F1-score. The remaining metrics should still be reported individually.
