@@ -1,6 +1,6 @@
 # NNDL Deepfake Detection Project
 
-This project compares a custom CNN trained from scratch with an ImageNet-pretrained EfficientNet-B0 for classifying face images as **FAKE** or **REAL**. The trained EfficientNet checkpoint powers a local image-upload demo.
+This project compares a custom CNN trained from scratch with an ImageNet-pretrained EfficientNet-B0 for classifying face images as **FAKE** or **REAL**. Both saved checkpoints power the local image-upload demo.
 
 ## Project layout
 
@@ -11,7 +11,7 @@ This project compares a custom CNN trained from scratch with an ImageNet-pretrai
 | `checkpoints_cnn_baseline/` | CNN baseline checkpoint |
 | `results/` and `results_cnn_baseline/` | Metrics, training curves and confusion matrices |
 | `results/comparison/` | Side-by-side metrics, figures and error analysis |
-| `app/` | Local Streamlit image-upload demo and inference code |
+| `app/` | Local Streamlit image-upload demo with predictions from both models |
 | `dataset/` | Dataset instructions; the image dataset is excluded from Git because of its size |
 | `report/` | Final report in Markdown and editable Word format |
 | `presentation/` | Final editable PowerPoint presentation |
@@ -26,9 +26,9 @@ python -m pip install -r requirements.txt
 python -m streamlit run app/demo.py
 ```
 
-Open the local URL printed by Streamlit, upload a JPG, PNG or WebP face image, and select **Analyze image**. The interface shows the prediction, confidence, `P(FAKE)` and `P(REAL)`. It also displays the held-out EfficientNet metrics from `results/test_metrics.json`. The demo loads `checkpoints/efficientnet_b0_best.pth`; keep that file in place. The checkpoint is a trusted local training artifact and is loaded with `weights_only=False` because it contains optimizer and random-number state as well as model weights. Do not replace it with an untrusted file.
+Open the local URL printed by Streamlit, upload a JPG, PNG or WebP face image, and select **Analyze image**. The interface shows each model's prediction, confidence, `P(FAKE)` and `P(REAL)`. It also displays the held-out EfficientNet metrics from `results/test_metrics.json`. The demo loads `checkpoints/efficientnet_b0_best.pth` and `checkpoints_cnn_baseline/cnn_baseline_best.pth`; keep both files in place. These checkpoints are trusted local training artifacts and are loaded with `weights_only=False` because they contain optimizer and random-number state as well as model weights. Do not replace them with untrusted files.
 
-Inference matches the notebook's test transform: convert to RGB, resize to 256 × 256, center crop to 224 × 224, convert to tensor, and normalize with ImageNet mean and standard deviation. The sigmoid of the model's single logit is `P(FAKE)` because training used **FAKE = 1** and **REAL = 0**. At a threshold of 0.50, confidence is the probability assigned to the predicted class.
+Inference matches both notebooks' test transform: convert to RGB, resize to 256 × 256, center crop to 224 × 224, convert to tensor, and normalize with ImageNet mean and standard deviation. The sigmoid of each model's single logit is `P(FAKE)` because training used **FAKE = 1** and **REAL = 0**. At a threshold of 0.50, confidence is the probability assigned to the predicted class.
 
 The model was evaluated on face images from this project's dataset. Its score on an uploaded image is not proof that the image is authentic or manipulated, especially for images from other generators, cameras or domains.
 
